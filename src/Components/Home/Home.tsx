@@ -1,9 +1,9 @@
 import type { movies } from "../../type/interface";
-import { useGetData } from "../../query-hook/uesGetData";
+import { useGetData } from "../../api-hooks/uesGetData";
 import { MdFavorite } from "react-icons/md";
 import style from "../../Styles/App.module.scss";
 import { useOutletContext } from "react-router-dom";
-import { useSearchData } from "../../query-hook/useSearch";
+import { useSearchData } from "../../api-hooks/useSearch";
 import { Link } from "react-router-dom";
 import { ImSpinner6 } from "react-icons/im";
 
