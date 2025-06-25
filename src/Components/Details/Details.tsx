@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useDetails } from "../../query-hook/useDetails";
+import { useDetails } from "../../api-hooks/useDetails";
 import style from "./Details.module.scss";
 import { ImSpinner6 } from "react-icons/im";
 

@@ -35,11 +35,6 @@ const NavBar = ({ setSearch }: NavBarProps) => {
                 Favorite List
               </Link>
             </li>
-            <li>
-              <Link className={`${style.link}`} to="readme">
-                Readme
-              </Link>
-            </li>
           </ul>
         </div>
       </nav>
