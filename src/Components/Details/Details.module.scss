@@ -1,0 +1,50 @@
+.container {
+  height: 80vh;
+  .card {
+    padding: 20px;
+    width: 90%;
+    margin: auto;
+
+    .card-movie {
+      display: flex;
+      gap: 30px;
+      position: relative;
+      border-radius: 18px;
+      overflow: hidden;
+      margin: 10px 0;
+
+      .card-img {
+        height: 400px;
+      }
+
+      .text-size {
+        font-size: 20px;
+        font-weight: 600;
+        letter-spacing: 1px;
+      }
+    }
+  }
+}
+
+.spinner-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+
+  .spinner {
+    font-size: 30px;
+    animation: spin 1s linear infinite;
+    will-change: transform;
+
+    @keyframes spin {
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  }
+}
