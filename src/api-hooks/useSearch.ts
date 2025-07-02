@@ -1,15 +1,14 @@
-import axios from "axios"
 import type { movies } from "../type/interface"
 import { useQuery } from '@tanstack/react-query';
+import api from "../utils/axoisInstance";
 
 const getData = async (search: string, media_type: "movie" | "multi") => {
-    const endPoint = `https://api.themoviedb.org/3/search/${media_type}`;
-    const { data } = await axios.get(endPoint, {
+    const { data } = await api.get(`search/${media_type}`, {
         params: {
-            query: search,
-            api_key: `7082867fc373d072c7bccae5cf8d5b32`
+            query: search
         }
-    })
+    }
+    )
     return data.results as movies[];
 }
 
