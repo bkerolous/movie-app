@@ -24,7 +24,7 @@ const NavBar = ({ setSearch }: NavBarProps) => {
           </div>
         )}
         <div>
-          <ul className={`${style["nav-left"]}`}>
+          <ul className={`${style["nav-right"]}`}>
             <li>
               <Link className={`${style.link}`} to="./">
                 Home
