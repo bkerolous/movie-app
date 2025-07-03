@@ -1,5 +1,9 @@
 .container {
   height: 80vh;
+
+  @media (max-width: 760px) {
+    height: auto;
+  }
   .card {
     padding: 20px;
     width: 90%;
@@ -12,6 +16,11 @@
       border-radius: 18px;
       overflow: hidden;
       margin: 10px 0;
+
+      @media (max-width: 760px) {
+        flex-direction: column;
+        padding: 4px;
+      }
 
       .card-img {
         height: 400px;
