@@ -8,15 +8,25 @@
   padding: 10px;
   margin: 10px;
   border-radius: 10px;
+  position: relative;
 
   .logo {
     font-size: 40px;
     font-weight: 600;
     text-transform: uppercase;
     font-style: italic;
+
+    @media (max-width: 760px) {
+      position: absolute;
+      left: 10px;
+      top: 10px;
+      font-size: 20px;
+    }
+
     .link {
       border: none;
       color: #eeeeeec2;
+
       &:hover {
         color: #eee;
         border: none;
@@ -32,9 +42,14 @@
       border: 1px solid #a8a8a83d;
       background-color: #002;
       color: #eee;
+      width: 100%;
+
       &::placeholder {
         color: #eeeeeec2;
       }
+    }
+    @media (max-width: 760px) {
+      display: none;
     }
   }
 
@@ -45,6 +60,7 @@
     text-decoration: none;
     color: #eeeeeec2;
     border: 2px solid transparent;
+
     &:hover {
       border: 2px solid rgba(0, 153, 255, 0.24);
       color: #eee;
@@ -55,8 +71,65 @@
     display: flex;
     justify-content: center;
     gap: 20px;
+
     li {
       list-style: none;
+    }
+
+    @media (max-width: 760px) {
+      display: none;
+    }
+  }
+
+  .menu-bar {
+    display: none;
+
+    @media (max-width: 760px) {
+      display: block;
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 24px;
+      color: #eee;
+      cursor: pointer;
+    }
+  }
+
+  .mobileMenu {
+    display: none;
+
+    @media (max-width: 760px) {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 50px;
+      padding: 0 10px;
+
+      .mobileMenu-search {
+        input {
+          border-radius: 8px;
+          padding: 4px;
+          border: 1px solid #a8a8a83d;
+          background-color: #002;
+          color: #eee;
+          width: 100%;
+
+          &::placeholder {
+            color: #eeeeeec2;
+          }
+        }
+        margin-bottom: 10px;
+      }
+
+      .nav-right-mobile {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        li {
+          list-style: none;
+        }
+      }
     }
   }
 }
