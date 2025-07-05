@@ -3,8 +3,6 @@ HEAD
 # React + TypeScript + TMDB Movies App
 🎬 React + TypeScript + TMDB Movies App
 
-# 🎬 React + TypeScript + TMDB Movies App
-f69e41b (Update README with latest project structure and features)
 
 This is a powerful and minimal movie browser app built with **React**, **TypeScript**, and **Vite**, leveraging the official **TMDB API**.
 
