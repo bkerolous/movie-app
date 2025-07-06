@@ -51,10 +51,6 @@ const Favorites = () => {
               <span>Permissible Age: </span>
               {movie?.adult ? "+ 16" : "+ 10"}
             </p>
-            <p>
-              <span>Genres : </span>
-              {movie?.genres?.map((genre) => `${genre.name}, `)}
-            </p>
             <span>Vote : {movie.vote_average.toFixed(1)}</span>
             <p>Overview : {movie.overview}</p>
           </div>
