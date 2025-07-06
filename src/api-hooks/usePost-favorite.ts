@@ -14,33 +14,23 @@ const postFav = async ({ movie, isFav }: { movie: movies; isFav: boolean }) => {
 
 export const useMutationFav = () => {
   const queryClient = useQueryClient();
+
   return useMutation({
     mutationFn: postFav,
-    onMutate: async ({ movie, isFav }: { movie: movies; isFav: boolean }) => {
-      await queryClient.cancelQueries({ queryKey: ["favorites"] });
-
-      const prevFav = queryClient.getQueryData<movies[]>(["favorites"]) || [];
-
-      queryClient.setQueryData<movies[]>(["favorites"], (old = []) => {
-        if (isFav) {
-          return [...old, movie];
-        } else {
-          return old.filter((fav) => fav.id !== movie.id);
-        }
-      });
-      return { prevFav };
-    },
-    onError: (_error, { movie, isFav }, context) => {
-      alert(
-        `Failed to ${isFav ? "add" : "remove"} ${movie.title} from favorites.`
-      );
-
-      if (context?.prevFav) {
-        queryClient.setQueryData(["favorites"], context.prevFav);
-      }
-    },
-    onSettled: () => {
+    onSuccess: () => {
+      // بعد نجاح العملية، أعد جلب قائمة المفضلات من TMDB
       queryClient.invalidateQueries({ queryKey: ["favorites"] });
+    },
+    onError: (error, { movie, isFav }) => {
+      console.error(
+        `❌ Failed to ${isFav ? "add" : "remove"} ${
+          movie.title
+        } from favorites.`,
+        error
+      );
+      alert(
+        `❌ Failed to ${isFav ? "add" : "remove"} favorite. Check console.`
+      );
     },
   });
 };
