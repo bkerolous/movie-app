@@ -16,8 +16,8 @@ interface OutletContext {
 const Home = () => {
   const { search } = useOutletContext<OutletContext>();
 
-  const { data: favorites = [] } = useGetFav(); // ✅ جلب المفضلات الحقيقية
-  const { mutate } = useMutationFav(); // ✅ لتنفيذ الإضافة والحذف
+  const { data: favorites = [] } = useGetFav();
+  const { mutate } = useMutationFav();
 
   const searchQuery = useSearchData(search, "multi");
   const generalQuery = useGetData();
@@ -56,7 +56,7 @@ const Home = () => {
                     onClick={() =>
                       mutate({
                         movie,
-                        isFav: !fav, // ✅ toggle add/remove
+                        isFav: !fav,
                       })
                     }
                     type="button"
