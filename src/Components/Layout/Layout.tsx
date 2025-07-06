@@ -5,12 +5,12 @@ import { useState } from "react";
 
 const Layout = () => {
   const [search, setSearch] = useState("");
-  const location = useLocation();
-  const isHome = location.pathname === "/";
+  const location = useLocation()
+  const isHome = location.pathname === '/'
 
   return (
     <>
-      <NavBar {...(isHome ? { setSearch } : {})} />
+      <NavBar {...(isHome ?{setSearch} : {})} />
       <Outlet context={{ search }} />
       <Footer />
     </>
