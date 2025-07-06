@@ -15,7 +15,6 @@ const Details = () => {
       </div>
     );
   if (isError) return <p>{(error as Error).message}</p>;
-  console.log(data);
 
   return (
     <>
@@ -48,8 +47,9 @@ const Details = () => {
                 </p>
                 <p className="card-media_type">
                   <span className={`${style["text-size"]}`}>Genres : </span>
-                  {data?.genres[0].name}, {data?.genres[1].name},{" "}
-                  {data?.genres[2].name}
+                  {
+                    data?.genres?.map((gener) => `${gener.name}, `)
+                  }
                 </p>
                 <p className="card-overview">
                   <span className={`${style["text-size"]}`}>Over View : </span>
