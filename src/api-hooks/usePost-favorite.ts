@@ -18,7 +18,6 @@ export const useMutationFav = () => {
   return useMutation({
     mutationFn: postFav,
     onSuccess: () => {
-      // بعد نجاح العملية، أعد جلب قائمة المفضلات من TMDB
       queryClient.invalidateQueries({ queryKey: ["favorites"] });
     },
     onError: (error, { movie, isFav }) => {
