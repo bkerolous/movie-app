@@ -94,6 +94,38 @@ body {
   }
 }
 
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+
+  .pageBtn {
+    padding: 6px 12px;
+    font-size: 14px;
+    background-color: transparent;
+    color: #eee;
+    border: 1px solid #0099ff55;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: #0099ff25;
+      border-color: #0099ff;
+    }
+  }
+
+  .activePage {
+    background-color: #0099ff;
+    color: #fff;
+    font-weight: bold;
+    border-color: #0099ff;
+  }
+}
+
+
 .spinner-wrap {
   display: flex;
   justify-content: center;
