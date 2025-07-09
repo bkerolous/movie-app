@@ -110,8 +110,15 @@ const Home = () => {
         <div className={style.pagination}>
           {Array.from({ length: Math.min(totalPages, 10) }, (_, i) => (
             <button
+              type="button"
               key={i + 1}
-              onClick={() => setPage(i + 1)}
+              onClick={() => {
+                setPage(i + 1);
+                window.scrollTo({
+                  top: 0,
+                  behavior: "smooth",
+                });
+              }}
               className={`${style.pageBtn} ${
                 page === i + 1 ? style.activePage : ""
               }`}
