@@ -1,52 +1,72 @@
-import type { movies } from "../../type/interface";
-import { useGetData } from "../../api-hooks/uesGetData";
+import { useState } from "react";
+import { useOutletContext, Link } from "react-router-dom";
 import { MdFavorite } from "react-icons/md";
-import style from "../../Styles/App.module.scss";
-import { useOutletContext } from "react-router-dom";
-import { useSearchData } from "../../api-hooks/useSearch";
-import { Link } from "react-router-dom";
 import { ImSpinner6 } from "react-icons/im";
+import style from "../../Styles/App.module.scss";
+import { useGetData } from "../../api-hooks/uesGetData";
+import { useSearchData } from "../../api-hooks/useSearch";
 import { useGetFav } from "../../api-hooks/useGetFav";
 import { useMutationFav } from "../../api-hooks/usePost-favorite";
+import type { movies } from "../../type/interface";
 
 interface OutletContext {
   search: string;
 }
 
 const Home = () => {
+  const [page, setPage] = useState(1);
   const { search } = useOutletContext<OutletContext>();
+  const isSearch = search.trim().length > 0;
 
   const { data: favorites = [] } = useGetFav();
   const { mutate } = useMutationFav();
 
-  const searchQuery = useSearchData(search, "multi");
-  const generalQuery = useGetData();
+  const {
+    data: searchData,
+    isLoading: isSearchLoading,
+    isError: isSearchError,
+    error: searchError,
+  } = useSearchData(search, "multi");
 
-  const { data, isLoading, isError, error } = search.trim()
-    ? searchQuery
-    : generalQuery;
+  const {
+    data: generalData,
+    isLoading: isGeneralLoading,
+    isError: isGeneralError,
+    error: generalError,
+  } = useGetData(page);
+
+  const moviesData: movies[] | undefined = isSearch
+    ? searchData
+    : generalData?.results;
+  const totalPages =
+    !isSearch && generalData?.total_pages ? generalData.total_pages : 1;
+  const isLoading = isSearch ? isSearchLoading : isGeneralLoading;
+  const isError = isSearch ? isSearchError : isGeneralError;
+  const error = isSearch ? searchError : generalError;
 
   const isMovieFav = (movie: movies) =>
     favorites.some((fav) => fav.id === movie.id);
 
   if (isLoading)
     return (
-      <div className={`${style["spinner-wrap"]}`}>
-        <ImSpinner6 className={`${style.spinner}`} />
+      <div className={style["spinner-wrap"]}>
+        <ImSpinner6 className={style.spinner} />
       </div>
     );
+
   if (isError) return <p>{(error as Error).message}</p>;
 
   return (
     <div className={style.container}>
       <div className={style["movie-card"]}>
-        {data?.length === 0 && (
+        {moviesData?.length === 0 && (
           <div className={style["no-results"]}>
             <p>No Results To Show</p>
           </div>
         )}
-        {data &&
-          data
+
+        {moviesData &&
+          moviesData
             .filter((movie) => movie.media_type === "movie")
             .map((movie: movies) => {
               const fav = isMovieFav(movie);
@@ -85,6 +105,22 @@ const Home = () => {
               );
             })}
       </div>
+
+      {!isSearch && (
+        <div className={style.pagination}>
+          {Array.from({ length: Math.min(totalPages, 10) }, (_, i) => (
+            <button
+              key={i + 1}
+              onClick={() => setPage(i + 1)}
+              className={`${style.pageBtn} ${
+                page === i + 1 ? style.activePage : ""
+              }`}
+            >
+              {i + 1}
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
