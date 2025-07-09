@@ -20,6 +20,9 @@ It supports real-time movie search, detailed movie info, and managing your favor
 - 🔁 **Auto-injected credentials** using Axios interceptors  
 - 📱 **Responsive UI**: mobile & desktop layouts  
 - 📂 **Clean modular structure** with Sass Modules  
+- 📄 **Pagination**: Browse trending movies with API-based paginated results
+- 🔎 **Search + Pagination**: Combine keyword search with pagination navigation
+
 
 ---
 
@@ -33,6 +36,7 @@ It supports real-time movie search, detailed movie info, and managing your favor
 - React Router v6  
 - Sass Modules  
 - TMDB API  
+- Pagination with TMDB API
 
 ---
 
@@ -62,7 +66,13 @@ VITE_ACCOUNT_ID=your_account_id
 npm run dev
 ```
 
-Open your browser at: [http://localhost:5173](http://localhost:5173)
+### 🔗 Live Demo & Repository
+
+**Live Demo**: [https://tmdb-movies-app-by-kb.netlify.app](https://tmdb-movies-app-by-kb.netlify.app)  
+**GitHub Repo**: [github.com/bkerolous/movie-app](https://github.com/bkerolous/movie-app)
+
+To run locally, open your browser at: [http://localhost:5173](http://localhost:5173)
+
 
 ---
 
@@ -107,6 +117,9 @@ src/
 - Favorites are synced directly with TMDB (no local storage or fake data).
 - Mobile navigation is conditionally rendered using media queries + `useState` logic.
 - Fully modular with reusable components and Sass styles.
+- The pagination is powered directly from the TMDB API using the `page` query parameter.
+- Search and trending movies are handled separately to avoid data mixing.
+- When searching, pagination is disabled for simplicity (can be extended later).
 
 ---
 
