@@ -125,6 +125,21 @@ body {
   }
 }
 
+.genreFilter {
+  margin: 1rem 0;
+  text-align: center;
+
+  select {
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    background-color: #001122;
+    color: #eee;
+  }
+}
+
+
 
 .spinner-wrap {
   display: flex;
