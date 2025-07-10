@@ -9,12 +9,22 @@ import { useGetFav } from "../../api-hooks/useGetFav";
 import { useMutationFav } from "../../api-hooks/usePost-favorite";
 import type { movies } from "../../type/interface";
 
+const genreList = [
+  { id: 28, name: "Action" },
+  { id: 12, name: "Adventure" },
+  { id: 35, name: "Comedy" },
+  { id: 18, name: "Drama" },
+  { id: 27, name: "Horror" },
+  { id: 10749, name: "Romance" },
+];
+
 interface OutletContext {
   search: string;
 }
 
 const Home = () => {
   const [page, setPage] = useState(1);
+  const [selectedGenre, setSelectedGenre] = useState<number | "">("");
   const { search } = useOutletContext<OutletContext>();
   const isSearch = search.trim().length > 0;
 
@@ -47,6 +57,10 @@ const Home = () => {
   const isMovieFav = (movie: movies) =>
     favorites.some((fav) => fav.id === movie.id);
 
+  const filteredMovies = selectedGenre
+    ? moviesData?.filter((movie) => movie.genre_ids?.includes(selectedGenre))
+    : moviesData;
+
   if (isLoading)
     return (
       <div className={style["spinner-wrap"]}>
@@ -58,15 +72,32 @@ const Home = () => {
 
   return (
     <div className={style.container}>
+      <div className={style.genreFilter}>
+        <select
+          title="genres"
+          value={selectedGenre}
+          onChange={(e) =>
+            setSelectedGenre(e.target.value ? Number(e.target.value) : "")
+          }
+        >
+          <option value="">All Genres</option>
+          {genreList.map((genre) => (
+            <option key={genre.id} value={genre.id}>
+              {genre.name}
+            </option>
+          ))}
+        </select>
+      </div>
+
       <div className={style["movie-card"]}>
-        {moviesData?.length === 0 && (
+        {filteredMovies?.length === 0 && (
           <div className={style["no-results"]}>
             <p>No Results To Show</p>
           </div>
         )}
 
-        {moviesData &&
-          moviesData
+        {filteredMovies &&
+          filteredMovies
             .filter((movie) => movie.media_type === "movie")
             .map((movie: movies) => {
               const fav = isMovieFav(movie);
@@ -114,10 +145,7 @@ const Home = () => {
               key={i + 1}
               onClick={() => {
                 setPage(i + 1);
-                window.scrollTo({
-                  top: 0,
-                  behavior: "smooth",
-                });
+                window.scrollTo({ top: 0, behavior: "smooth" });
               }}
               className={`${style.pageBtn} ${
                 page === i + 1 ? style.activePage : ""
