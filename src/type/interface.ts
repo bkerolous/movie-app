@@ -7,18 +7,6 @@ export interface movies {
     vote_average: number,
     overview: string,
     poster_path: string,
-    genres:[
-        {
-            id: number
-            name:string
-        },
-        {
-            id: number
-            name:string
-        },
-        {
-            id: number
-            name:string
-        }
-    ]
+    genre_ids: number[],
+    genres?: { id: number; name: string }[];
 }
