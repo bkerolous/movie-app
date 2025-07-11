@@ -1,19 +1,24 @@
 import { useQuery } from "@tanstack/react-query";
 import api from "../utils/axoisInstance";
 
-interface Genre {
+// نوع الجينر
+export interface Genre {
   id: number;
   name: string;
 }
 
-const getGenres = async (): Promise<Genre[]> => {
+// دالة جلب الجينرات من TMDB
+const fetchGenres = async (): Promise<Genre[]> => {
   const { data } = await api.get("/genre/movie/list");
   return data.genres;
 };
 
+// هوك مخصص لاستدعاء الجينرات
 export const useGenres = () => {
-  return useQuery({
+  return useQuery<Genre[]>({
     queryKey: ["genres"],
-    queryFn: getGenres,
+    queryFn: fetchGenres,
+    staleTime: 1000 * 60 * 60, // ساعة كاملة كـ cache
+    retry: 1, // إعادة المحاولة مرة واحدة لو فشل
   });
 };
