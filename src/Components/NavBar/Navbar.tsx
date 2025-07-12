@@ -16,7 +16,7 @@ const NavBar = ({ setSearch }: NavBarProps) => {
     <nav className={style.container}>
       <div className={style.logo}>
         <Link className={style.link} to="./">
-          Trending Movies
+          MovieDex
         </Link>
       </div>
 

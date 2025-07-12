@@ -17,7 +17,7 @@ const Footer = () => {
       <div className={`${style.footer}`}>
         <div className={`${style.logo}`}>
           <Link onClick={startPage} className={`${style.link}`} to="./">
-            Tranding Movies
+            MovieDex
           </Link>
         </div>
         <div className={`${style.icon}`}>
