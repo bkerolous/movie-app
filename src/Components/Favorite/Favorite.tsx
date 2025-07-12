@@ -1,6 +1,6 @@
 import { MdFavorite } from "react-icons/md";
 import style from "../../Styles/App.module.scss";
-import { useMutationFav } from "../../api-hooks/useMutationFav";
+import { useMutationFav } from "../../api-hooks/usePost-favorite";
 import { useGetFav } from "../../api-hooks/useGetFav";
 import type { movies } from "../../type/interface";
 import { ImSpinner6 } from "react-icons/im";

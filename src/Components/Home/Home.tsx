@@ -6,7 +6,7 @@ import style from "../../Styles/App.module.scss";
 import { useGetData } from "../../api-hooks/uesGetData";
 import { useSearchData } from "../../api-hooks/useSearch";
 import { useGetFav } from "../../api-hooks/useGetFav";
-import { useMutationFav } from "../../api-hooks/useMutationFav";
+import { useMutationFav } from "../../api-hooks/usePost-favorite";
 import { useGenres } from "../../api-hooks/useGenres";
 import type { movies } from "../../type/interface";
 
@@ -134,7 +134,19 @@ const Home = () => {
 
           {!isSearch && totalPages > 1 && (
             <div className={style.pagination}>
-              {Array.from({ length: Math.min(totalPages, 10) }, (_, i) => (
+              <button
+                type="button"
+                disabled={page === 1}
+                onClick={() => {
+                  setPage((prev) => prev - 1);
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                }}
+                className={style.pageBtn}
+              >
+                Prev
+              </button>
+
+              {Array.from({ length: Math.min(totalPages, 15) }, (_, i) => (
                 <button
                   type="button"
                   key={i + 1}
@@ -149,6 +161,18 @@ const Home = () => {
                   {i + 1}
                 </button>
               ))}
+
+              <button
+                type="button"
+                disabled={page === 15}
+                onClick={() => {
+                  setPage((prev) => prev + 1);
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                }}
+                className={style.pageBtn}
+              >
+                Next
+              </button>
             </div>
           )}
         </>
